@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Suisse Int'l';
+    src: url('SuisseIntl-Semibold.woff') format('woff'),
+        url('SuisseIntl-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
