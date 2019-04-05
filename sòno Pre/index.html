@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+		<link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
+		<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/grid-gallery.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- <bgsound src="Suono.ogg"></bgsound> -->
+
+		<!-- <embed src="Suono.mp3" width="100" height="80"></embed> -->
+		<audio display="none" id="totem" loop >
+		  	<source src="Suono.mp3" type="audio/mp3">
+				<source src="Suono.ogg" type="audio/ogg">
+				<source src="Suono.m4a" type="audio/m4a">
+		</audio>
+		<style>
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-Medium.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-Medium.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+			font-style: Regular
+		}
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-MediumItalic.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-MediumItalic.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+			font-style: Italic
+		}
+
+		@font-face {
+				font-family: SuisseWorks;
+				src: url('Fonts/SuisseWorks-RegularItalic.ttf') format('truetype');
+				src: url('Fonts/SuisseWorks-RegularItalic.woff') format('woff');
+				/*src: url('Fonts/SuisseWorks-RegularItalic.eot?#iefix') format('embedded-opentype');*/
+		}
+
+		body {
+			background-color: white;
+			cursor: default;
+		}
+
+			#main {
+				position: absolute;
+				/* width: 83.333%; height: 100%; */
+				width: 1100px;
+				/* height: 2000px; */
+				padding-top: 96px;
+				top: 0;
+				left: 50%;
+				margin-left: -550px;
+			}
+
+			.debug {
+        display: block;
+				/* background-color: rgba(0, 0, 0, 0.1); */
+      }
+
+			#header {
+        position: fixed;
+        width: 1100px; height: 96px;
+        top: 0;
+				background-color: white;
+				border-bottom: 1px solid black;
+				/* transition: transform 0.2s ease-in-out; */
+				z-index: 2;
+      }
+
+			.nav-up {
+				transform: translateY(-97px);
+			}
+
+			#logo {
+				position: relative;
+				float: left; bottom: -18px;
+				font-family: "SuisseIntl";
+				font-size: 60px;
+			}
+
+			#cerkio {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+			}
+
+
+			#punto {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+			}
+
+			#suonoOnOff {
+				position: relative;
+				top: 45px
+			}
+
+			.cerchioNero {
+				height: 25%;
+				width: 25%;
+				background-color: black;
+				transition: 0.3s;
+			}
+
+			.puntoNero {
+				height: 100%;
+				width: 100%;
+				border: 1px black solid;
+				transition: 0.3s
+			}
+
+			.cerchioBianco {
+				height: 25%;
+				width: 25%;
+				background-color: white;
+				transition: 0.3s;
+			}
+
+			.puntoBianco {
+				height: 100%;
+				width: 100%;
+				border: 1px white solid;
+				transition: 0.3s
+			}
+
+			.icon {
+				position: relative;
+				width: 32px;
+				height: 32px;
+				top: 30px;
+				left: 100%;
+				margin-left: -48px;
+				transform: translate(-50%, -50);
+				background-color: rgba(0, 0, 0, 0.0);
+				cursor: pointer;
+				transition: 0.1s;
+			}
+
+			/* ICONA ANIMATA SUONO */
+
+			.cerchio {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+				border: 1px black solid;
+				transition: 0.3s;
+			}
+
+			.cerchioL {
+				height: 100%;
+				width: 100%;
+			}
+
+			.cerchioM {
+				height: 75%;
+				width: 75%;
+				animation-timing-function: ease;
+			}
+
+			.cerchioS {
+				height: 50%;
+				width: 50%;
+				animation-timing-function: ease;
+			}
+
+			#base {
+				position: absolute;
+				top: 150%;
+				font-family: "SuisseIntl";
+				font-size: 180px;
+				color: black;
+				text-decoration: none;
+				}
+
+			#base:hover {
+				opacity: 0.5;
+				transition: 0.5s
+			}
+
+			#milano {
+				position: absolute;
+				top: 212%; left: 490px;
+				font-family: "SuisseIntl";
+				font-size: 80px;
+				}
+
+			#data {
+				position: absolute;
+				left:11px;
+				top: 270%;
+				font-family: "SuisseIntl";
+				font-size: 39.5px;
+				}
+
+			/* [data-aos="new-animation"] {
+				opacity: 1;
+				transition-property: opacity;
+			}
+			[data-aos="new-animation"].aos-animate {
+				opacity: 0;
+			} */
+
+
+			@media (min-device-width: 768px) and (max-device-width: 1100px) and (orientation: portrait){
+				/* Structure mobile 768 to 980 */
+					#main        {width: 768px; margin-left: -384px}
+					#header         {width: 768px;}
+					#base 					{margin-top: 100px}
+					#milano					{margin-top: 100px}
+					#data						{margin-top: 100px}
+					}
+
+			@media (min-device-width: 768px) and (max-device-width: 1100px) {
+				/* Structure mobile 768 to 980 */
+					#main        {width: 768px; margin-left: -384px}
+					#header         {width: 768px;}
+					}
+
+			@media (min-width: 700px) and (max-width: 1100px) {
+				/* Structure 600 to 980 */
+					#main        {width: 700px; margin-left: -350px}
+					#header         {width: 700px;}
+					#logo           {margin-left: 20px;}
+					#base 					{font-size: 120px;top: 250px}
+					#milano					{font-size: 50px;left: 330px;top: 320px}
+					#data						{font-size: 25.5px;left:8px;top: 385px}
+					}
+
+			@media (max-device-width: 767px) {
+				/* Structure to 767px */
+					#main        {width: 100%; margin-left: -50%}
+					#header         {width: 100%; left: 0%}
+					#logo           {margin-left: 5%;}
+					}
+
+			@media (max-width: 699px) {
+				/* Structure to 767px */
+					#main        {width: 100%; margin-left: -50%}
+					#header         {width: 100%; left: 0%}
+					#logo           {margin-left: 5%;}
+					#base 					{margin-left: 5%;font-size: 120px;top: 250px}
+					#milano					{font-size: 50px;left: calc(5% + 5px);top: 370px}
+					#data						{margin-left: calc(5% - 3.5px);font-size: 25.5px;top: 425px}
+					}
+
+		</style>
+	</head>
+	<body>
+
+		<div class='debug noselect' id='main'>
+      <div id='header'>
+				<div class= "cambiocoloretesti" id='logo'>sòno</div>
+			</div>
+
+			<div class='icon' id='biancoNero'>
+				<div id="cerkio" class="cerchioNero"></div>
+				<div id="punto" class="puntoNero"></div>
+			</div>
+			<div class='icon' id='suonoOnOff' onclick="toggleVolume()">
+				<div id="cerchioL" class="cerchio cerchioL"></div>
+				<div id="cerchioM" class="cerchio cerchioL"></div>
+				<div id="cerchioS" class="cerchio cerchioL"></div>
+			</div>
+
+			<a href= "https://base.milano.it/" class="cambiocoloretesti" id="base">BASE</a>
+			<div class="cambiocoloretesti" id="milano">Milano</div>
+			<div class="cambiocoloretesti" id="data">18 e 19 Marzo 2019</div>
+
+	</body>
+	<script>
+
+		var didScroll;
+		var lastScrollTop = 0;
+		var delta = 1;
+		var navbarHeight = $('#main').outerHeight();
+		var angle0;
+
+
+
+		// $(window).scroll(function(event){
+		//   didScroll = true;
+		// });
+		//
+		// setInterval(function() {
+		//   if (didScroll) {
+		//     hasScrolled();
+		//     didScroll = false;
+		//   }
+		// }, 250);
+		//
+		// function hasScrolled() {
+		//   var st = $(this).scrollTop();
+		// 	// if (Math.abs(lastScrollTop, st) <= delta)
+  	// 	// 	return;
+		// 	if (st > lastScrollTop /*&& st > navbarHeight*/){
+	  // 		$('#header').addClass('nav-up');
+		// 	} else {
+	  // 		if(st + $(window).height() < $(document).height()) {
+	  //   		$('#header').removeClass('nav-up');
+	  // 		}
+		// 	}
+		// 	lastScrollTop = st;
+		// }
+
+		//ICONA ANIMATA BIANCONERO
+
+		var black = 0;
+
+		function ClickUnoBN() {
+			$("#cerkio").removeClass("cerchioNero");
+			$("#cerkio").addClass("puntoBianco");
+			$("#punto").removeClass("puntoNero");
+			$("#punto").addClass("cerchioBianco");
+			$("body").css("background-color", "black");
+			$(".cambiocoloretesti").css("color", "white")
+			$("#header").css("border-bottom", "1px solid white")
+			$("#header").css("background-color", "black")
+			$(".cerchio").css("border", "1px solid white")
+		}
+
+		function ClickDueBN() {
+			$("#cerkio").removeClass("puntoBianco");
+			$("#cerkio").addClass("cerchioNero");
+			$("#punto").removeClass("cerchioBianco");
+			$("#punto").addClass("puntoNero");
+			$("body").css("background-color", "white");
+			$(".cambiocoloretesti").css("color", "black")
+			$("#header").css("border-bottom", "1px solid black")
+			$("#header").css("background-color", "white")
+			$(".cerchio").css("border", "1px solid black")
+		}
+
+		function inverti() {
+			if (black == 0) {
+				black = 1;
+				ClickUnoBN();
+			} else {
+				black = 0;
+				ClickDueBN();
+			}
+		}
+
+		$("#biancoNero").click(inverti);
+
+		//ICONA ANIMATA SUONO
+		var mute = 0;
+
+		function ClickUnoSuono() {
+
+			$("#cerchioM").removeClass("cerchioM");
+			$("#cerchioM").addClass("cerchioL");
+
+			$("#cerchioS").removeClass("cerchioS");
+			$("#cerchioS").addClass("cerchioL");
+
+		}
+
+		function ClickDueSuono() {
+			$("#cerchioM").removeClass("cerchioL");
+			$("#cerchioM").addClass("cerchioM");
+
+			$("#cerchioS").removeClass("cerchioM");
+			$("#cerchioS").addClass("cerchioS");
+		}
+
+
+		var totem = document.getElementById("totem");
+
+		function onoff() {
+			if (mute == 0) {
+				mute = 1;
+				// ClickUnoSuono()
+				// totem.pause();
+				ClickDueSuono()
+				totem.play();
+			} else {
+				mute = 0;
+				// ClickDueSuono()
+				// totem.play();
+				ClickUnoSuono()
+				totem.pause();
+			}
+		}
+
+		$("#suonoOnOff").click(onoff)
+
+		function toggleVolume() {
+			if (Mute = 1) {
+				totem.play();
+				// $("#suonoOnOff").css("background-color","red")
+				// $("#Suono").pause();
+			} else if (Mute = 0) {
+				totem.pause();
+				// $("#Suono").play();
+				// $("#suonoOnOff").css("background-color","blue")
+			}
+			// isMuted = !isMuted;
+		}
+
+
+	</script>
+</html>

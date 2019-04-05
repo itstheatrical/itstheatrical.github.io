@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+		<link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
+		<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/grid-gallery.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<style>
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/CanelaText-Regular.ttf') format('truetype');
+			src: url('Fonts/CanelaText-Regular.woff') format('woff');
+			font-style: Regular
+		}
+
+		body {
+			background-color: white;
+			cursor: default;
+		}
+
+			#header {
+        position: relative;
+        width: 100%; height: 85px;
+        top: 0;
+				background-color: white;
+				border-bottom: 1px solid black;
+				z-index: 2;
+      }
+
+			#info {
+				font-family: CanelaText;
+				font-size: 25px;
+				position: absolute;
+				left: 40px; top: 30px;
+			}
+
+			#info:hover {
+				cursor: pointer;
+			}
+
+			#info:before {
+			  content: "";
+			  position: absolute;
+			  width: 100%;
+			  height: 1.5px;
+			  bottom: 0;
+			  left: 0;
+			  background-color: #000;
+			  visibility: hidden;
+			  -webkit-transform: scaleX(0);
+			  transform: scaleX(0);
+			  -webkit-transition: all 0.3s ease-in-out 0s;
+			  transition: all 0.3s ease-in-out 0s;
+			}
+
+			#info:hover:before {
+			  visibility: visible;
+			  -webkit-transform: scaleX(1);
+			  transform: scaleX(1);
+			}
+
+			#buttons {
+				position: absolute;
+				top: 20px; right: 40px;
+			}
+
+			.fa {
+			  padding: 8px;
+			  font-size: 20px;
+			  width: 20px;
+			  text-align: center;
+			  text-decoration: none;
+				border-radius: 50%;
+				transition: 0.5s ease-in-out
+			}
+
+			.fa:hover {
+			  /* opacity: 0.7; */
+				background: black;
+			  color: white;
+				transition: 0.5s ease-in-out
+
+			}
+
+			.fa-facebook {
+			  background: white;
+			  color: black;
+				border: 1px solid black;
+			}
+
+			.fa-instagram {
+				background: white;
+			  color: black;
+				border: 1px solid black;
+			}
+
+			#testi {
+				width: 100%; height: 100%;
+				position: fixed;
+				/* background-color: red; */
+			}
+
+			#wmhh {
+				font-size: 80px;
+				line-height: 80px;
+				font-family: CanelaText;
+				text-align: center;
+				width: 430px;
+				/* background-color: red; */
+				position: relative;
+				top: 80px; left: 50%;
+				transform: translatex(-50%)
+			}
+
+			#data {
+				font-size: 25px;
+				font-family: CanelaText;
+				position: fixed;
+				bottom: 50px; left: 40px
+			}
+
+			#base {
+				font-size: 25px;
+				font-family: CanelaText;
+				position: fixed;
+				bottom: 70px; right: 40px;
+				color: black;
+				text-decoration: none;
+				transition: 0.5s;
+			}
+
+			#base:hover {
+				opacity: 0.5;
+				transition: 0.5s;
+			}
+
+			#via {
+				font-size: 15px;
+				font-family: CanelaText;
+				position: fixed;
+				bottom: 50px; right: 40px;
+				color: black;
+				text-decoration: none;
+			}
+
+			#via:before {
+			  content: "";
+			  position: absolute;
+			  width: 100%;
+			  height: 1px;
+			  bottom: 0;
+			  left: 0;
+			  background-color: #000;
+			  visibility: hidden;
+			  -webkit-transform: scaleX(0);
+			  transform: scaleX(0);
+			  -webkit-transition: all 0.3s ease-in-out 0s;
+			  transition: all 0.3s ease-in-out 0s;
+			}
+
+			#via:hover:before {
+			  visibility: visible;
+			  -webkit-transform: scaleX(1);
+			  transform: scaleX(1);
+			}
+
+
+			@media (min-device-width: 768px) and (max-device-width: 1100px) {
+				/* Structure mobile 768 to 980 */
+					}
+
+			@media (min-width: 700px) and (max-width: 1100px) {
+				/* Structure 600 to 980 */
+					}
+
+			@media (max-device-width: 767px) {
+				/* Structure to 767px */
+				#wmhh				{widht:280px; font-size: 60px; line-height: 60px; top: 55px}
+				#header			{height: 60px}
+				#info				{font-size: 20px; top:20px; left: 8%}
+				#buttons		{top: 15px; right: 8%}
+				.fa 				{padding: 5px; font-size: 20px}
+				#base				{font-size: 20px; left: 8%; bottom:70px}
+				#via				{font-size: 15px; left: 8%; right: initial}
+				#data				{font-size: 20px; left: 8%; bottom: 120px;}
+					}
+
+			@media (max-width: 699px) {
+				/* Structure to 767px */
+				#wmhh				{widht:280px; font-size: 60px; line-height: 60px;}
+				#header			{height: 60px}
+				#info				{font-size: 20px; top:20px; left: 8%}
+				#buttons		{top: 15px; right: 8%}
+				.fa 				{padding: 5px; font-size: 20px}
+				#base				{font-size: 20px; left: 8%; bottom:70px}
+				#via				{font-size: 15px; left: 8%; right: initial}
+				#data				{font-size: 20px; left: 8%; bottom: 120px;}
+					}
+
+		</style>
+	</head>
+	<body>
+
+      <div id='header'>
+					<div onclick="location.href='info.html'" id="info"> INFO </div>
+					<div id="buttons">
+					<a href="https://www.facebook.com/labsintesic1/" class="fa fa-facebook"></a>
+					<a href="https://www.instagram.com/labsintesi_c1/" class="fa fa-instagram"></a>
+				</div>
+			</div>
+			<div id="testi">
+					<div id="wmhh"> WHAT <br> MAKES <br> HUMANS <br> HUMAN? </div>
+					<div id="data"> 18 - 19 MARCH </div>
+					<a id="base" href="https://base.milano.it"> SPAZIO BASE MILANO </a>
+					<a id="via" href="https://goo.gl/maps/wZEn33nLrDP2"> Via Bergognone, 34 </a>
+			</div>
+	</body>
+	<script>
+	</script>
+</html>

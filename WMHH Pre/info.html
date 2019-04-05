@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+		<link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
+		<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/grid-gallery.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<style>
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/CanelaText-Regular.ttf') format('truetype');
+			src: url('Fonts/CanelaText-Regular.woff') format('woff');
+			font-style: Regular
+		}
+
+		body {
+			background-color: white;
+			cursor: default;
+
+		}
+
+		#pagina{
+			position: fixed;
+			width: 100%; height: 100%;
+		}
+
+			#header {
+        position: relative;
+        width: 100%; height: 85px;
+        top: 0;
+				background-color: white;
+				border-bottom: 1px solid black;
+				z-index: 2;
+      }
+
+			#info {
+				font-family: CanelaText;
+				font-size: 25px;
+				position: absolute;
+				left: 40px; top: 30px;
+			}
+
+			#info:after {
+			  content: "";
+			  position: absolute;
+			  width: 100%;
+				bottom:0;
+			  left:0;
+			  margin:auto;
+			  background: #000;
+			  height:2px;
+			}
+
+			#wmhhLONG:hover {
+				cursor: pointer;
+			}
+
+			#wmhhLONG:before {
+			  content: "";
+			  position: absolute;
+			  width: 100%;
+			  height: 1.5px;
+			  bottom: 0;
+			  left: 0;
+			  background-color: #000;
+			  visibility: hidden;
+			  -webkit-transform: scaleX(0);
+			  transform: scaleX(0);
+			  -webkit-transition: all 0.3s ease-in-out 0s;
+			  transition: all 0.3s ease-in-out 0s;
+			}
+
+			#wmhhLONG:hover:before {
+			  visibility: visible;
+			  -webkit-transform: scaleX(1);
+			  transform: scaleX(1);
+			}
+
+			#wmhhSHORT:hover {
+				cursor: pointer;
+			}
+
+			#wmhhSHORT:before {
+			  content: "";
+			  position: absolute;
+			  width: 100%;
+			  height: 1.5px;
+			  bottom: 0;
+			  left: 0;
+			  background-color: #000;
+			  visibility: hidden;
+			  -webkit-transform: scaleX(0);
+			  transform: scaleX(0);
+			  -webkit-transition: all 0.3s ease-in-out 0s;
+			  transition: all 0.3s ease-in-out 0s;
+			}
+
+			#wmhhSHORT:hover:before {
+			  visibility: visible;
+			  -webkit-transform: scaleX(1);
+			  transform: scaleX(1);
+			}
+
+			#wmhhLONG {
+				font-family: CanelaText;
+				font-size: 25px;
+				position: absolute;
+				left: 50%; top: 30px;
+				width: 400px;
+				text-align: center;
+				transform: translateX(-50%);
+				/* background-color: red */
+			}
+
+			#wmhhSHORT {
+				font-family: CanelaText;
+				font-size: 20px;
+				position: absolute;
+				left: 50%; top: 20px;
+				width: 80px;
+				text-align: center;
+				transform: translateX(-50%);
+				display: none;
+				/* background-color: red */
+			}
+
+			#buttons {
+				position: absolute;
+				top: 20px; right: 40px;
+			}
+
+			.fa {
+			  padding: 8px;
+			  font-size: 20px;
+			  width: 20px;
+			  text-align: center;
+			  text-decoration: none;
+				border-radius: 50%;
+				transition: 0.5s ease-in-out
+			}
+
+			.fa:hover {
+			  /* opacity: 0.7; */
+				background: black;
+			  color: white;
+				transition: 0.5s ease-in-out
+
+			}
+
+			.fa-facebook {
+			  background: white;
+			  color: black;
+				border: 1px solid black;
+			}
+
+			.fa-instagram {
+				background: white;
+			  color: black;
+				border: 1px solid black;
+			}
+
+			/* #testi {
+				width: 100%; height: 100%;
+				position: fixed;
+				background-color: red;
+			} */
+
+
+			#footer {
+				background-color: black;
+				position: fixed;
+				height: 80px; width: 100%;
+				transform: translateX(-8px);
+				bottom: 0%;
+			}
+
+			#crediti {
+				font-family: CanelaText;
+				font-size: 15px;
+				position: absolute;
+				color: white;
+				line-height: 80px;
+				left: 40px;
+				transform: translateX(8px);
+			}
+
+			#copyIT {
+				font-family: CanelaText;
+				font-size: 18px;
+				position: absolute;
+				top: 50%; transform:translateY(-50%);
+				left: 40px; right: 55%;
+			}
+
+			#copyEN {
+				font-family: CanelaText;
+				font-size: 18px;
+				position: absolute;
+				top: 50%; transform:translateY(-50%);
+				left: 55%; right: 40px;
+			}
+
+			#copyTOT {
+				font-family: CanelaText;
+				font-size: 18px;
+				position: absolute;
+				top: 50%; transform:translateY(-50%);
+				left: 8%; right: 8%;
+				display: none;
+			}
+
+			@media (min-device-width: 768px) and (max-device-width: 1100px) {
+				/* Structure mobile 768 to 980 */
+				#info				{font-size: 22.5px; top:30px; left: 8%}
+				#buttons		{top: 20px; right: 8%}
+				#wmhhLONG		{font-size: 22.5px; top:30px;width: 360px}
+				#crediti		{left: 8%}
+				#copyIT			{left: 8%}
+				#copyEN			{right: 8%}
+					}
+
+			@media (min-width: 700px) and (max-width: 1100px) {
+				/* Structure 600 to 980 */
+				#info				{font-size: 22.5px; top:30px; left: 8%}
+				#buttons		{top: 20px; right: 8%}
+				#wmhhLONG		{font-size: 22.5px; top:30px;width: 360px}
+				#crediti		{left: 8%}
+				#copyIT			{left: 8%}
+				#copyEN			{right: 8%}
+					}
+
+			@media (max-device-width: 767px) {
+				/* Structure to 767px */
+				#header			{height: 60px}
+				#info				{font-size: 20px; top:20px; left: 8%}
+				#buttons		{top: 15px; right: 8%}
+				.fa 				{padding: 5px; font-size: 20px}
+				#wmhhLONG		{display: none;}
+				#wmhhSHORT	{display: initial}
+				#crediti		{left: 8%; right: 8%; font-size: 12px; line-height: inherit; top: 50%; transform: translateY(-50%);}
+				#footer			{height: 60px}
+				#copyIT			{display: none;}
+				#copyEN			{display: none;}
+				#copyTOT		{display: initial}
+					}
+
+			@media (max-width: 699px) {
+				/* Structure to 767px */
+				#header			{height: 60px}
+				#info				{font-size: 20px; top:20px; left: 8%}
+				#buttons		{top: 15px; right: 8%}
+				.fa 				{padding: 5px; font-size: 20px}
+				#wmhhLONG		{display: none;}
+				#wmhhSHORT	{display: initial}
+				#crediti		{left: 8%; right: 8%; font-size: 12px; line-height: inherit; top: 50%; transform: translateY(-50%);}
+				#footer			{height: 60px}
+				#copyIT			{display: none;}
+				#copyEN			{display: none;}
+				#copyTOT		{display: initial}
+					}
+
+		</style>
+	</head>
+	<body>
+
+		<div id="pagina">
+				<div id="copyIT"> Partendo dal tema generale What makes humans human? sono state realizzate dodici installazioni, ognuna con un proprio nome ed inerente ad uno specifico sotto-tema. L'obiettivo non è solo quello di rispondere alla domanda iniziale, bensì quello di porne di  nuove. Cosa ci rende veramente umani? Inizia a pensare.
+					</div>
+
+				<div id="copyEN"> Partendo dal tema generale What makes humans human? sono state realizzate dodici installazioni, ognuna con un proprio nome ed inerente ad uno specifico sotto-tema. L'obiettivo non è solo quello di rispondere alla domanda iniziale, bensì quello di porne di  nuove. Cosa ci rende veramente umani? Inizia a pensare.
+					</div>
+
+				<div id="copyTOT"> Partendo dal tema generale What makes humans human? sono state realizzate dodici installazioni, ognuna con un proprio nome ed inerente ad uno specifico sotto-tema. L'obiettivo non è solo quello di rispondere alla domanda iniziale, bensì quello di porne di  nuove. Cosa ci rende veramente umani? Inizia a pensare.<br>
+					<br>
+					Partendo dal tema generale What makes humans human? sono state realizzate dodici installazioni, ognuna con un proprio nome ed inerente ad uno specifico sotto-tema. L'obiettivo non è solo quello di rispondere alla domanda iniziale, bensì quello di porne di  nuove. Cosa ci rende veramente umani? Inizia a pensare.
+					</div>
+
+		<div id="footer">
+		<div id="crediti"> Laboratorio di Sintesi Finale C1 - Politecnico di Milano, Design della Comunicazione </div>
+		</div>
+	</div>
+
+      <div id='header'>
+					<div id="info"> INFO </div>
+					<div onclick="location.href='index.html'" id="wmhhLONG"> WHAT MAKES HUMANS HUMAN? </div>
+					<div onclick="location.href='index.html'" id="wmhhSHORT"> WMHH? </div>
+					<div id="buttons">
+					<a href="https://www.facebook.com/labsintesic1/" class="fa fa-facebook"></a>
+					<a href="https://www.instagram.com/labsintesi_c1/" class="fa fa-instagram"></a>
+				</div>
+			</div>
+
+
+	</body>
+	<script>
+	</script>
+</html>

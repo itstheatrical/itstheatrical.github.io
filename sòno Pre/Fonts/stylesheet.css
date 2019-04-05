@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Suisse Works';
+    src: url('SuisseWorks-RegularItalic.eot');
+    src: url('SuisseWorks-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('SuisseWorks-RegularItalic.woff') format('woff'),
+        url('SuisseWorks-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Suisse Int'l';
+    src: url('SuisseIntl-Medium.eot');
+    src: url('SuisseIntl-Medium.eot?#iefix') format('embedded-opentype'),
+        url('SuisseIntl-Medium.woff') format('woff'),
+        url('SuisseIntl-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+

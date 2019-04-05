@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <style>
+
+
+            #tap{
+              position:absolute;
+              top: 50%; left: 50%;
+              height: 36px; width: 36px;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+
+            }
+
+            #cerchioL{
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+              border: 1px white solid;
+            }
+
+            #cerchioM{
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+              border: 1px white solid;
+            }
+
+            #cerchioS{
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+              border: 1px white solid;
+            }
+
+            .cerchioL{
+              height: 36px; width: 36px;
+              transition: 1s;
+            }
+
+            .cerchioM{
+              height: 27px; width: 27px;
+              transition: 1s;
+              animation-timing-function: ease;
+            }
+
+            .cerchioS{
+              height: 18px; width: 18px;
+              transition: 1s;
+              animation-timing-function: ease;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="cerchioL" class="cerchioL" ></div>
+        <div id="cerchioM" class="cerchioM" ></div>
+        <div id="cerchioS" class="cerchioS" ></div>
+
+        <div id="tap"></div>
+
+              <script>
+
+              var mute = 0;
+
+              function ClickUno() {
+
+                $("#cerchioM").removeClass("cerchioM");
+                $("#cerchioM").addClass("cerchioL");
+
+                $("#cerchioS").removeClass("cerchioS");
+                $("#cerchioS").addClass("cerchioL");
+
+              }
+
+              function ClickDue() {
+                $("#cerchioM").removeClass("cerchioL");
+                $("#cerchioM").addClass("cerchioM");
+
+                $("#cerchioS").removeClass("cerchioM");
+                $("#cerchioS").addClass("cerchioS");
+              }
+
+              function onoff() {
+                if (mute == 0) {
+                mute = 1;
+                ClickUno()
+                }
+                else  {
+                mute = 0;
+                ClickDue()
+                }
+              }
+
+            $("#tap").click(onoff)
+
+
+              </script>
+    </body>
+
+</html>

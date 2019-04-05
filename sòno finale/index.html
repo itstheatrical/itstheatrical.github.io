@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+	<meta charset="utf-8">
+	<!-- <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="p5.min.js"></script>
+	<script src="addons/p5.dom.min.js"></script>
+	<script src="addons/p5.sound.min.js"></script>
+	<script src="progressbar.js"></script>
+	<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+	<style>
+		/* @font-face {
+			font-family: 'SuisseIntl';
+			src: url('SuisseIntl-Medium.eot');
+			src: url('SuisseIntl-Medium.eot?#iefix') format('embedded-opentype'),
+			url('SuisseIntl-Medium.woff') format('woff'),
+			url('SuisseIntl-Medium.ttf') format('truetype');
+			font-weight: medium;
+			font-style: normal;
+		} */
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-Medium.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-Medium.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+		}
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-MediumItalic.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-MediumItalic.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+			font-style: Italic
+		}
+
+		@font-face {
+			font-family: SuisseWorks;
+			src: url('Fonts/SuisseWorks-RegularItalic.ttf') format('truetype');
+			src: url('Fonts/SuisseWorks-RegularItalic.woff') format('woff');
+			/*src: url('Fonts/SuisseWorks-RegularItalic.eot?#iefix') format('embedded-opentype');*/
+		}
+
+
+		/* @font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-Medium.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-Medium.woff') format('woff');
+			src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');
+		} */
+
+		/* @font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-Regular.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-Regular.woff') format('woff');
+			font-style: normal;
+		} */
+
+		/* @font-face {
+			font-family: SuisseWorks;
+			src: url('Fonts/SuisseWorks-RegularItalic.ttf') format('truetype');
+			src: url('Fonts/SuisseWorks-RegularItalic.woff') format('woff');
+			font-weight: normal;
+		} */
+
+		#progress-overlay {
+			position: absolute;
+			z-index: 999;
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			/* min-width: 800px; */
+		}
+
+		#intro {
+			position: relative;
+			width: 480px;
+			height: 480px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#loader {
+			position: relative;
+			width: 360px;
+			height: 260px;
+			left: 50%;
+			transform: translateX(-50%);
+			text-align: center;
+			font-family: "SuisseIntl";
+			font-weight: normal;
+			font-size: 150px;
+		}
+
+		/* #loaderWave {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			top: -300px;
+		} */
+
+		#counter {
+			position: absolute;
+			width: 140px;
+			height: 140px;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, 0);
+			/* border: 1px solid black; */
+			border-radius: 50%;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 140px;
+			font-family: "SuisseIntl";
+			font-size: 20pt;
+			line-height: 140px;
+			z-index: 5;
+		}
+
+		#start-button {
+			position: absolute;
+			width: 140px;
+			height: 140px;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, 0);
+			/* border: 1px solid black; */
+			border-radius: 50%;
+			text-align: center;
+			vertical-align: middle;
+			font-family: "SuisseIntl";
+			font-size: 20pt;
+			line-height: 140px;
+			opacity: 0;
+			z-index: 10;
+		}
+
+		#start-button:hover {
+			cursor: pointer;
+			font-family: "SuisseWorks";
+			font-weight: normal;
+		}
+
+		#start-button {
+			/* display: none; */
+		}
+
+		/* #main {
+			position: absolute;
+			width: 83.333%; height: 100%;
+			width: 80%;
+			padding-top: 96px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1;
+		}  */
+
+		#main {
+			position: absolute;
+			width: 1100px;
+			padding-top: 96px;
+			top: 0;
+			left: 50%;
+			margin-left: -550px;
+			z-index: 1;
+		}
+
+		#header {
+			position: fixed;
+			width: 1100px;
+			height: 96px;
+			top: 0%;
+			/* left: 0%; */
+			border-bottom: 1px solid black;
+		}
+
+		#logo {
+			position: relative;
+			float: left;
+			bottom: -18px;
+			font-family: "SuisseIntl";
+			font-size: 60px;
+		}
+
+		#about {
+			position: relative;
+			float: right;
+			/* top: 45px; */
+			bottom: -48px;
+			/* margin-right: 32px; */
+			font-family: "SuisseIntl";
+			font-size: 30px;
+			cursor: pointer;
+		}
+
+		#about:hover {
+			font-family: "SuisseWorks";
+			font-weight: normal;
+		}
+
+		html.can-touch #about:hover {
+			position: relative;
+			float: right;
+			top: 45px;
+			margin-right: 5%;
+			font-family: "SuisseIntl";
+			font-size: 30px;
+			cursor: pointer;
+		}
+
+		#rectGame {
+			position: relative;
+			width: 100%;
+			top: 48px;
+			/* background-color: yellow; */
+		}
+
+		#squareGame {
+			position: relative;
+			width: 100px;
+			height: 100px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: red;
+		}
+
+		#biancoNero {
+			margin-right: -32px;
+			margin-top: 48px;
+		}
+
+		.icon {
+			z-index: 2;
+			/*aggiunto Mic per avere bottoni davanti a gioco*/
+			position: absolute;
+			width: 32px;
+			height: 32px;
+			top: 0%;
+			left: 100%;
+			margin-left: -16px;
+			transform: translate(-50%, -50%);
+			background-color: rgba(0, 0, 0, 0.0);
+			cursor: pointer;
+			transition: 0.1s;
+		}
+
+		.icon:hover {
+			width: 37px;
+			height: 37px;
+			transition: 0.1s;
+		}
+
+		.noselect {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			-webkit-touch-callout: none;
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		}
+
+		.hoverAll:hover {
+			opacity: 0.5;
+		}
+
+		/* ICONA ANIMATA SUONO */
+
+		.cerchio {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
+			border: 1px black solid;
+			transition: 0.3s;
+		}
+
+		.cerchioL {
+			height: 100%;
+			width: 100%;
+		}
+
+		.cerchioM {
+			height: 75%;
+			width: 75%;
+			animation-timing-function: ease;
+		}
+
+		.cerchioS {
+			height: 50%;
+			width: 50%;
+			animation-timing-function: ease;
+		}
+
+		/* ICONA ANIMATA BIANCONERO */
+
+		#cerkio {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
+		}
+
+
+		#punto {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
+		}
+
+		.cerchioNero {
+			height: 25%;
+			width: 25%;
+			background-color: black;
+			transition: 0.3s;
+		}
+
+		.puntoNero {
+			height: 100%;
+			width: 100%;
+			border: 1px black solid;
+			transition: 0.3s
+		}
+
+		.cerchioBianco {
+			height: 25%;
+			width: 25%;
+			background-color: white;
+			transition: 0.3s;
+		}
+
+		.puntoBianco {
+			height: 100%;
+			width: 100%;
+			border: 1px white solid;
+			transition: 0.3s
+		}
+
+		.debug {
+			display: block;
+			background-color: rgba(0, 0, 0, 0.0);
+		}
+
+		@media (min-device-width: 768px) and (max-device-width: 1100px) {
+
+			/* Structure mobile 768 to 980 */
+			#main {
+				width: 768px;
+				margin-left: -384px
+			}
+
+			#header {
+				width: 768px;
+			}
+
+		}
+
+		@media (min-width: 700px) and (max-width: 1100px) {
+
+			/* Structure 600 to 980 */
+			#main {
+				width: 700px;
+				margin-left: -350px
+			}
+
+			#header {
+				width: 700px;
+			}
+
+			#logo {
+				margin-left: 20px;
+			}
+
+			#about {
+				margin-right: 20px;
+			}
+
+			.icon {
+				margin-left: -40px;
+			}
+		}
+
+		@media (max-device-width: 767px) {
+
+			/* Structure to 767px */
+			#main {
+				width: 100%;
+				margin-left: -50%
+			}
+
+			#header {
+				width: 100%;
+				left: 0%
+			}
+
+			#logo {
+				margin-left: 5%;
+			}
+
+			#about {
+				margin-right: 5%;
+			}
+
+			.gg-box {
+				margin-left: 5%;
+				width: 90%;
+			}
+
+			#about:target {
+				font-family: "SuisseIntl";
+			}
+
+			#about:active {
+				font-family: "SuisseWorks";
+			}
+
+			#intro {
+				width: 100%;
+			}
+
+			#loader {
+				width: 100%;
+			}
+
+			.icon {
+				margin-left: -48px;
+			}
+		}
+
+		@media (max-width: 699px) {
+
+			/* Structure to 767px */
+			#main {
+				width: 100%;
+				margin-left: -50%
+			}
+
+			#header {
+				width: 100%;
+				left: 0%
+			}
+
+			#logo {
+				margin-left: 5%;
+			}
+
+			#about {
+				margin-right: 5%;
+			}
+
+			.gg-box {
+				margin-left: 5%;
+				width: 90%;
+			}
+
+			.icon {
+				margin-right: 5%;
+				margin-left: -40px;
+			}
+		}
+
+		/* DISABLE REFRESH ON SWIPE */
+		.body,
+		.wrapper {
+			/* Break the flow */
+			position: absolute;
+			top: 0px;
+
+			/* Give them all the available space */
+			width: 100%;
+			height: 100%;
+
+			/* Remove the margins if any */
+			margin: 0;
+
+			/* Allow them to scroll down the document */
+			overflow-y: hidden;
+		}
+
+		.body {
+			/* Sending body at the bottom of the stack */
+			z-index: 1;
+		}
+
+		.wrapper {
+			/* Making the wrapper stack above the body */
+			z-index: 2;
+		}
+
+		/* PREVENTING ELASTIC BOUNCE (Safari Mobile) */
+
+		.body {
+			position: fixed;
+			overflow: hidden;
+		}
+
+		.html {
+			position: fixed;
+			overflow: hidden;
+		}
+
+
+		/* PROGRESS BAR */
+		#container {
+			position: absolute;
+			width: 140px; height: 140px;
+			left: 50%; top: 50%;
+			transform: translate(-50%, 0);
+		}
+	</style>
+</head>
+
+<body class="body">
+
+	<div id="progress-overlay" class="noselect">
+		<div class='debug' id='intro'>
+			<div class='debug' id='loader'>sòno
+				<!-- <img src='./Loader/LoaderWave.gif' id='loaderWave'> -->
+			</div>
+			<div id='counter'>0</div>
+			<div id='start-button' onclick="start()" class='debug'>Play</div>
+
+			<div id="container"></div>
+
+		</div>
+	</div>
+
+	<div class='wrapper noselect'>
+		<div class='debug noselect' id='main'>
+			<div class='debug' id='header'>
+				<div class='cambiocoloretesti' id='logo'>sòno</div>
+				<div class='cambiocoloretesti' id='about' onclick="location.href='about.html'">info</div>
+			</div>
+			<div class='debug' id='rectGame'>
+				<div class='icon' id='suonoOnOff' onclick="toggleVolume()">
+					<div id="cerchioL" class="cerchio cerchioL"></div>
+					<div id="cerchioM" class="cerchio cerchioM"></div>
+					<div id="cerchioS" class="cerchio cerchioS"></div>
+				</div>
+				<div class='icon' id='biancoNero'>
+					<div id="cerkio" class="cerchioNero"></div>
+					<div id="punto" class="puntoNero"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<script>
+
+	$(document).ready(function() {
+		resizeRectGame();
+		resizeSquareGame();
+	});
+
+	window.onresize = function(event) {
+		resizeRectGame();
+		resizeSquareGame();
+	}
+
+	function resizeRectGame() {
+		vph = $(window).height();
+		$('#rectGame').css({
+			'height': vph - 160 + 'px'
+		});
+	}
+
+	function resizeSquareGame() {
+		w = $('#rectGame').width();
+		h = $('#rectGame').height();
+		if (w < h) {
+			h = w;
+		} else {
+			w = h;
+		}
+		$('#squareGame').css({
+			'width': w + 'px'
+		});
+		$('#squareGame').css({
+			'height': h + 'px'
+		});
+	}
+
+	//COUNTER
+
+	var counter = 0;
+	var c = 0;
+	var bar = new ProgressBar.Circle(container, {
+		strokeWidth: 0.5,
+		easing: 'linear',
+		duration: 1,
+		color: '#000000',
+		trailColor: '#ffffff',
+		trailWidth: 1,
+		svgStyle: null
+	});
+	var i = setInterval(function() {
+
+		$("#counter").html(c);
+
+		if (c < 30) {
+			c++;
+		} else {
+			if (musicLoaded) {
+				c++;
+			}
+		}
+		if (c == 101) {
+			// setTimeout(function() {
+				$("#counter").css("opacity", "0")
+				// $("#counter").css("transition","2s")
+				$("#start-button").css("opacity", "1")
+				$("#start-button").css("transition", "1s")
+			// }, 1000);
+		} else if (c == 102) {
+			// setTimeout(function() {
+				clearInterval(i);
+				$("#counter").css("display", "none")
+			// }, 1000);
+		}
+
+		if (c<=100) {
+			counter = c/100;
+		}
+
+		bar.animate(counter);
+
+	}, 20);
+
+
+	//ICONA ANIMATA SUONO
+	var mute = 0;
+
+	function ClickUnoSuono() {
+
+		$("#cerchioM").removeClass("cerchioM");
+		$("#cerchioM").addClass("cerchioL");
+
+		$("#cerchioS").removeClass("cerchioS");
+		$("#cerchioS").addClass("cerchioL");
+
+	}
+
+	function ClickDueSuono() {
+		$("#cerchioM").removeClass("cerchioL");
+		$("#cerchioM").addClass("cerchioM");
+
+		$("#cerchioS").removeClass("cerchioM");
+		$("#cerchioS").addClass("cerchioS");
+	}
+
+	function onoff() {
+		if (mute == 0) {
+			mute = 1;
+			ClickUnoSuono()
+		} else {
+			mute = 0;
+			ClickDueSuono()
+		}
+	}
+
+	$("#suonoOnOff").click(onoff)
+
+	//ICONA ANIMATA BIANCONERO
+
+	var black = 0;
+
+	function ClickUnoBN() {
+		$("#cerkio").removeClass("cerchioNero");
+		$("#cerkio").addClass("puntoBianco");
+		$("#punto").removeClass("puntoNero");
+		$("#punto").addClass("cerchioBianco");
+		$("body").css("background-color", "black");
+		$(".cambiocoloretesti").css("color", "white")
+		$("#header").css("border-bottom", "1px solid white")
+		$(".cerchio").css("border", "1px solid white")
+	}
+
+	function ClickDueBN() {
+		$("#cerkio").removeClass("puntoBianco");
+		$("#cerkio").addClass("cerchioNero");
+		$("#punto").removeClass("cerchioBianco");
+		$("#punto").addClass("puntoNero");
+		$("body").css("background-color", "white");
+		$(".cambiocoloretesti").css("color", "black")
+		$("#header").css("border-bottom", "1px solid black")
+		$(".cerchio").css("border", "1px solid black")
+	}
+
+	function inverti() {
+		if (black == 0) {
+			black = 1;
+			ClickUnoBN();
+		} else {
+			black = 0;
+			ClickDueBN();
+		}
+	}
+
+	$("#biancoNero").click(inverti);
+
+
+
+
+
+	// LOADER
+
+	function BufferLoader(context, urlList, callback) {
+		this.context = context;
+		this.urlList = urlList;
+		this.onload = callback;
+		this.bufferList = new Array();
+		this.loadCount = 0;
+	}
+
+	BufferLoader.prototype.loadBuffer = function(url, index) {
+		// Load buffer asynchronously
+		var request = new XMLHttpRequest();
+		request.open("GET", url, true);
+		request.responseType = "arraybuffer";
+
+		var loader = this;
+
+		request.onload = function() {
+			// Asynchronously decode the audio file data in request.response
+			loader.context.decodeAudioData(
+				request.response,
+				function(buffer) {
+					if (!buffer) {
+						alert('error decoding file data: ' + url);
+						return;
+					}
+					loader.bufferList[index] = buffer;
+					if (++loader.loadCount == loader.urlList.length)
+						loader.onload(loader.bufferList);
+				},
+				function(error) {
+					console.error('decodeAudioData error', error);
+					console.error(JSON.stringify(error));
+					console.error(request.response);
+				}
+			);
+		}
+
+		request.onerror = function() {
+			alert('BufferLoader: XHR error');
+		}
+
+		request.send();
+	}
+
+	BufferLoader.prototype.load = function() {
+		for (var i = 0; i < this.urlList.length; ++i)
+			this.loadBuffer(this.urlList[i], i);
+	}
+
+
+	/*
+	Init
+	*/
+
+	var context;
+	var bufferLoader;
+	var mainGainNode;
+	var isMuted = false;
+	var suono1;
+	var suono2;
+	var suono3;
+	var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+	function init() {
+		// Fix up prefixing
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		context = new AudioContext();
+
+		mainGainNode = context.createGain();
+		mainGainNode.connect(context.destination);
+
+		bufferLoader = new BufferLoader(
+			context,
+			[
+				'Suoni2.0/Suono1.m4a',
+				'Suoni2.0/Suono3.m4a',
+				'Suoni2.0/Suono2.m4a'
+			],
+			// finishedLoading
+		);
+
+		bufferLoader.load();
+	}
+
+	// function finishedLoading(bufferList) {
+	// 	// var sourceGain1 = createSource(bufferList[0]);
+	// 	// source1 = sourceGain1.source;
+	// 	// myGain1 = sourceGain1.gainNode;
+	// 	// var sourceGain2 = createSource(bufferList[1]);
+	// 	// source2 = sourceGain2.source;
+	// 	// myGain2 = sourceGain2.gainNode;
+	// 	// var sourceGain3 = createSource(bufferList[2]);
+	// 	// source3 = sourceGain3.source;
+	// 	// myGain3 = sourceGain3.gainNode;
+	// 	// musicLoaded = true;
+	// 	// reportDone();
+	// }
+
+	// function createSource(buffer) {
+	// 	var source = context.createBufferSource();
+	// 	// Create a gain node.
+	// 	var gainNode = context.createGain();
+	// 	source.buffer = buffer;
+	// 	// Turn on looping.
+	// 	source.loop = true;
+	// 	// Connect source to gain.
+	// 	source.connect(gainNode);
+	// 	// Connect gain to destination.
+	// 	gainNode.connect(mainGainNode);
+	//
+	// 	return {
+	// 		source: source,
+	// 		gainNode: gainNode
+	// 	};
+	// }
+
+	var phaserLoaded = false;
+	var musicLoaded = false;
+
+	function reportDone() {
+		if (musicLoaded) {
+			document.getElementById('start-button').style = 'display: block';
+		}
+		ifFirefox();
+	}
+
+	function start() {
+		document.getElementById('progress-overlay').style = 'display: none';
+		toggleVolume();
+		toggleVolume();
+		ifFirefox();
+	}
+
+	window.onload = init();
+
+
+
+
+
+	// P5
+	var canvas;
+	var diametro = 100;
+	var raggio;
+	var fontCerchi;
+	var w;
+	var h;
+	var mezzaW;
+	var mezzaH;
+	var wMenoRaggio;
+	var hMenoRaggio;
+	var sogliaSilenzio;
+	var posX;
+	var posY;
+	var t = 0;
+	var nX;
+	var nY;
+	var posCur;
+	var pos1;
+	var pos2;
+	var pos3;
+	var dist1;
+	var dist2;
+	var dist3;
+	var dist12;
+	var dist13;
+	var dist23;
+	var forza12;
+	var forza23;
+	var forza31;
+	var coeffRepulsione = 1.2;
+	var volume1 = 0.3;
+	var volume2 = 0.3;
+	var volume3 = 1.2;
+
+	function ifFirefox() {
+		if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+			toggleVolume();
+		}
+	}
+
+	function preload() {
+		// put preload code here
+		fontCerchi = loadFont('Fonts/SuisseIntl-Regular.ttf');
+		suono1 = loadSound('Suoni2.0/Suono1.m4a');
+		suono2 = loadSound('Suoni2.0/Suono2.m4a');
+		suono3 = loadSound('Suoni2.0/Suono3.m4a');
+	}
+
+	function setup() {
+		// put setup code here
+		noCursor();
+
+		w = $('#rectGame').width();
+		h = $('#rectGame').height();
+
+		canvas = createCanvas(w, h);
+		colorMode(HSB, 255);
+		canvas.position($('#rectGame').offset().left, $('#rectGame').offset().top);
+
+		windowResized();
+		resizeCerchi(w, h);
+
+		suono1.loop();
+		suono2.loop();
+		suono3.loop();
+
+		musicLoaded = true;
+		reportDone();
+	}
+
+	function draw() {
+		// put drawing code here
+		if (black == 0) {
+			background(255);
+		} else {
+			background(0);
+		}
+
+		// setto lo stile del testo
+		textFont(fontCerchi);
+		textSize(diametro / 4);
+		textAlign(CENTER, BASELINE);
+
+		// setto lo stile del cerchio
+		stileCerchio();
+
+		// cerchio player
+
+		// if (isSafari && iOS) {
+		// 	// posX = 1.3 * mouseX - 0.23 * w + diametro * (1 - mouseX / w);
+		// 	// posY = 1.3 * mouseY - 0.23 * h + diametro * (1 - mouseY / h);
+		// 	posX = mouseX;
+		// 	posY = mouseY;
+		// } else {
+		// 	posX = mouseX;
+		// 	posY = mouseY;
+		// }
+		posCur = new p5.Vector(mouseX, mouseY);
+		posCur = controlloPos(posCur);
+		ellipse(posCur.x, posCur.y, diametro, diametro);
+		disegnaTesto('io', posCur.x, posCur.y);
+
+		// cerchi altri
+		nX = noise(t);
+		nY = noise(t + 8);
+		posX = map(nX, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		posY = map(nY, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		pos1 = new p5.Vector(posX, posY);
+
+		nX = noise(t + 3);
+		nY = noise(t + 13);
+		posX = map(nX, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		posY = map(nY, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		pos2 = new p5.Vector(posX, posY);
+
+		nX = noise(t + 15);
+		nY = noise(t + 4);
+		posX = map(nX, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		posY = map(nY, 0.1, 0.9, raggio + 1, w - raggio - 1);
+		pos3 = new p5.Vector(posX, posY);
+
+		dist12 = dist(pos1.x, pos1.y, pos2.x, pos2.y);
+		dist23 = dist(pos2.x, pos2.y, pos3.x, pos3.y);
+		dist31 = dist(pos3.x, pos3.y, pos1.x, pos1.y);
+		forza12 = new p5.Vector(raggio * (pos1.x - pos2.x) / dist12 * coeffRepulsione, raggio * (pos1.y - pos2.y) / dist12 * coeffRepulsione);
+		forza23 = new p5.Vector(raggio * (pos2.x - pos3.x) / dist23 * coeffRepulsione, raggio * (pos2.y - pos3.y) / dist23 * coeffRepulsione);
+		forza31 = new p5.Vector(raggio * (pos3.x - pos1.x) / dist31 * coeffRepulsione, raggio * (pos3.y - pos1.y) / dist31 * coeffRepulsione);
+		pos1.add(forza12).sub(forza31);
+		pos2.add(forza23).sub(forza12);
+		pos3.add(forza31).sub(forza23);
+
+		pos1 = controlloPos(pos1);
+		ellipse(pos1.x, pos1.y, diametro, diametro);
+		disegnaTesto('essi', pos1.x, pos1.y);
+
+		pos2 = controlloPos(pos2);
+		ellipse(pos2.x, pos2.y, diametro, diametro);
+		disegnaTesto('essi', pos2.x, pos2.y);
+
+		pos3 = controlloPos(pos3);
+		ellipse(pos3.x, pos3.y, diametro, diametro);
+		disegnaTesto('essi', pos3.x, pos3.y);
+
+		suoni();
+
+		t += 0.001;
+	}
+
+	function windowResized() {
+		w = $('#rectGame').width();
+		h = $('#rectGame').height();
+		mezzaW = w / 2;
+		mezzaH = h / 2;
+
+		resizeCanvas(w, h);
+		canvas.position($('#rectGame').offset().left, $('#rectGame').offset().top);
+
+		resizeCerchi(w, h);
+	}
+
+	function resizeCerchi(a, b) {
+		diametro = Math.round(min(a, b) / 6)
+
+		raggio = Math.round(diametro / 2);
+		wMenoRaggio = w - raggio;
+		hMenoRaggio = h - raggio;
+		sogliaSilenzio = diametro * 3;
+	}
+
+	function stileCerchio() {
+		fill(0, 0, 0, 0);
+		if (black == 0) {
+			stroke(0);
+		} else {
+			stroke(255);
+		}
+		strokeWeight(1);
+	}
+
+	function disegnaTesto(testo, xTesto, yTesto) {
+		if (black == 0) {
+			fill(0);
+		} else {
+			fill(255);
+		}
+		noStroke();
+		translate(0, diametro / 16);
+		text(testo, xTesto, yTesto);
+		translate(0, -diametro / 16);
+		stileCerchio();
+	}
+
+	function controlloPos(vettore) {
+		if (vettore.x <= raggio) {
+			vettore.x = raggio + 1;
+		} else if (vettore.x >= wMenoRaggio) {
+			vettore.x = wMenoRaggio - 1;
+		}
+
+		if (vettore.y <= raggio) {
+			vettore.y = raggio + 1;
+		} else if (vettore.y >= hMenoRaggio) {
+			vettore.y = hMenoRaggio - 1;
+		}
+
+		return (vettore);
+	}
+
+	function suoni() {
+		var vol;
+
+		dist1 = int(dist(posCur.x, posCur.y, pos1.x, pos1.y));
+		dist2 = int(dist(posCur.x, posCur.y, pos2.x, pos2.y));
+		dist3 = int(dist(posCur.x, posCur.y, pos3.x, pos3.y));
+
+		if (dist1 < diametro) {
+			suono1.setVolume(volume1);
+		} else if (dist1 > sogliaSilenzio) {
+			suono1.setVolume(0);
+		} else {
+			vol = map(dist1, diametro, sogliaSilenzio, volume1, 0);
+			suono1.setVolume(vol);
+		}
+
+		if (dist2 < diametro) {
+			suono2.setVolume(volume2);
+		} else if (dist2 > sogliaSilenzio) {
+			suono2.setVolume(0);
+		} else {
+			vol = map(dist2, diametro, sogliaSilenzio, volume2, 0);
+			suono2.setVolume(vol);
+		}
+
+		if (dist3 < diametro) {
+			suono3.setVolume(volume3);
+		} else if (dist3 > sogliaSilenzio) {
+			suono3.setVolume(0);
+		} else {
+			vol = map(dist3, diametro, sogliaSilenzio, volume3, 0);
+			suono3.setVolume(vol);
+		}
+	}
+
+	function toggleVolume() {
+		if (isMuted) {
+			suono1.play();
+			suono2.play();
+			suono3.play();
+		} else {
+			suono1.stop();
+			suono2.stop();
+			suono3.stop();
+		}
+		isMuted = !isMuted;
+	}
+
+	// FIX HOVER APPICCICOSO SU mobile
+	document.addEventListener('touchstart', function addtouchclass(e) { // first time user touches the screen
+		document.documentElement.classList.add('can-touch') // add "can-touch" class to document root using classList API
+		document.removeEventListener('touchstart', addtouchclass, false) // de-register touchstart event
+	}, false)
+</script>
+
+</html>

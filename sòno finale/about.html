@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+		<link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
+		<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/grid-gallery.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-Medium.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-Medium.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+			font-style: Regular
+		}
+
+		@font-face {
+			font-family: SuisseIntl;
+			src: url('Fonts/SuisseIntl-MediumItalic.ttf') format('truetype');
+			src: url('Fonts/SuisseIntl-MediumItalic.woff') format('woff');
+			/*src: url('Fonts/SuisseIntl-Medium.eot?#iefix') format('embedded-opentype');*/
+			font-style: Italic
+		}
+
+		@font-face {
+				font-family: SuisseWorks;
+				src: url('Fonts/SuisseWorks-RegularItalic.ttf') format('truetype');
+				src: url('Fonts/SuisseWorks-RegularItalic.woff') format('woff');
+				/*src: url('Fonts/SuisseWorks-RegularItalic.eot?#iefix') format('embedded-opentype');*/
+		}
+
+		body {background-color: white}
+
+			#main {
+				position: absolute;
+				/* width: 83.333%; height: 100%; */
+				width: 1100px;
+				/* height: 2000px; */
+				padding-top: 96px;
+				top: 0;
+				left: 50%;
+				margin-left: -550px;
+			}
+
+			.debug {
+        display: block;
+				/* background-color: rgba(0, 0, 0, 0.1); */
+      }
+
+			#header {
+        position: fixed;
+        width: 1100px; height: 96px;
+        top: 0%;
+				background-color: white;
+				border-bottom: 1px solid black;
+				transition: transform 0.2s ease-in-out;
+				z-index: 2;
+      }
+
+			.nav-up {
+				transform: translateY(-97px);
+			}
+
+			#logo {
+				position: relative;
+				float: left; bottom: -18px;
+				font-family: "SuisseIntl";
+				font-size: 60px;
+				cursor: pointer;
+				transition: 0.5;
+			}
+
+			#about {
+				position: relative;
+				float: right; bottom: -48px;
+				font-family: "SuisseWorks";
+				font-size: 30px;
+			}
+
+			#body1 {
+				position: relative;
+			  height: 1100px;
+				top: 48px;
+				/* background-color: teal */
+			}
+
+			#testo {
+				/* display: inline-block; */
+				position: relative;
+				width: 550px;
+				margin-right: -4px;
+				font-family: "SuisseIntl";
+				font-size: 20px;
+				/* background-color: yellow; */
+				z-index: 0
+			}
+
+			#biscione {
+				position: absolute;
+				width: 60%; height: 20px;
+				right: -20px;
+				top: 450px;
+				z-index: -1;
+				/* background-color: red */
+			}
+
+			.quadrato {
+				position: relative;
+				/* width: 600px;  */
+				height: 800px;
+				left: 50%; top: 0px;
+				transform: translateX(-50%);
+				margin-top: -780px;
+				/* background-color: green; */
+			}
+
+			#immagine0 {
+				animation-name: rotazione;
+				animation-duration: 1s;
+			}
+
+			.gg-box {
+				/* background-color: red; */
+				z-index: 2
+			}
+
+			#footer {
+				position: relative;
+				width: 1100px; height: 190px;
+				margin-top: 100px; left: 0%;
+				border-top: 1px solid black;
+				z-index: 0;
+				/* background-color: green; */
+			}
+
+			#footerNames {
+				position: relative;
+				vertical-align: middle;
+				font-family: "SuisseIntl";
+				/* font-style: italic; */
+				font-size: 19px;
+
+				/* background-color: blue; */
+				width: 40%;
+				float: left;
+				margin-top: 3%;
+			}
+
+			.name-effect {
+				color: black;
+				text-decoration: none;
+			}
+
+			#footerCrediti {
+				position: relative;
+				/* top: 50px; */
+				/* justify-content: flex-end; */
+				font-family: "SuisseIntl";
+				font-size: 12px;
+				color: black;
+				/* left: 60%; */
+				/* top: -100%; */
+				/* height: 100%; */
+				width: 50%;
+				float: right;
+				vertical-align: middle;
+				/* background-color: red; */
+				margin-top: 3%;
+				margin-bottom: 3%;
+			}
+
+			.noselect {
+  			-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+     		-khtml-user-select: none;
+       	-moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+			}
+
+			.hoverAll:hover {
+				opacity: 0.5;
+			}
+
+
+
+			[data-aos="new-animation"] {
+				opacity: 1;
+				transition-property: opacity;
+			}
+			[data-aos="new-animation"].aos-animate {
+				opacity: 0;
+			}
+
+			@keyframes rotazioneBiscione {
+				from {transform: rotate(0);}
+				to {transform: rotate(360);}
+			}
+
+			@media (min-device-width: 768px) and (max-device-width: 1100px) {
+				/* Structure mobile 768 to 980 */
+					#main        {width: 768px; margin-left: -384px}
+					#header         {width: 768px;}
+					#footer         {width: 768px; height: 150px; margin-top: 80px}
+					#footerNames		{font-size: 16px}
+					#testo           {width: 384px;font-size: 16px;}
+					#biscione				{transform: translatey(+100%);}
+					#body1        {height: 950px;}
+					}
+
+			@media (min-width: 700px) and (max-width: 1100px) {
+				/* Structure 600 to 980 */
+					#main        {width: 700px; margin-left: -350px}
+					#header         {width: 700px;}
+					#footer         {width: 700px; height: 150px; margin-top: 80px}
+					#footerNames		{font-size: 16px}
+					#logo           {margin-left: 20px;}
+					#about					{margin-right: 20px;}
+					#testo           {width: 330px;font-size: 16px;margin-left: 20px}
+					#biscione				{transform: translatey(100px);}
+					#body1        {height: 1100px;}
+					}
+
+			@media (max-device-width: 767px) {
+				/* Structure to 767px */
+					#main        {width: 100%; margin-left: -50%}
+					#header         {width: 100%; left: 0%}
+					#footer         {width: 100%; height: 105px; margin-top: 50px; margin-bottom: 10%}
+					#footerNames		{margin-left: 5%;font-size: 16px;}
+					#testo           {left: 5%;width: 90%;font-size: 16px;}
+					#logo           {margin-left: 5%;}
+					#about           {margin-right: 5%;}
+					#biscione           {display: none;}
+					#body1        {height: 100%;margin-bottom: 90px;}
+					#footerCrediti	{margin-right: 5%;width: 45%}
+					.gg-box					{margin-left: 5%;width: 90%;}
+					#about:target		{font-family: "SuisseIntl";}
+					#about:active		{font-family: "SuisseWorks";}
+
+					}
+
+			@media (max-width: 699px) {
+				/* Structure to 767px */
+					#main        {width: 100%; margin-left: -50%}
+					#header         {width: 100%; left: 0%}
+					#footer         {width: 100%; height: 105px; margin-top: 50px}
+					#footerNames		{margin-left: 5%;font-size: 16px;}
+					#testo           {left: 5%;width: 90%;font-size: 16px;}
+					#logo           {margin-left: 5%;}
+					#about           {margin-right: 5%;}
+					#biscione           {display: none;}
+					#body1        {height: 100%;margin-bottom: 90px;}
+					.gg-box					{margin-left: 5%;width: 90%;}
+					}
+
+		</style>
+	</head>
+	<body>
+
+		<div class='debug noselect' id='main'>
+      <div id='header'>
+				<div class='hoverAll' id='logo' onclick="location.href='index.html'">sòno</div>
+				<div id='about'>info</div>
+			</div>
+			<div class='debug' id='body1'>
+				<div id='biscione'>
+					<div class='quadrato' id='quadrato0' data-aos='new-animation' >
+						<img id='immagine0' src='./BiscioneSVG/fettaTavoladisegno0.svg'>
+					</div>
+				</div>
+				<div id='testo'>
+					<body>
+							Sòno è una riflessione sullo spazio personale, limite fisico che definisce la nostra identità e le nostre relazioni. Deriva istintiva dell’evoluzione, che la società ha codificato sotto forma di convenzione, varia così frequentemente tra gli individui e i contesti da non poter essere percepito in maniera univoca. <br>
+							<br>
+							Nell’esperienza quotidiana esso assume una duplice funzione: da una parte è un’aura protettiva che ci distanzia dagli altri, dall’altra è una bolla che ospita i nostri conoscenti e amici, avvicinandoli a noi via via che i rapporti si fanno più stretti. Questa sua doppia natura lo rende un’esperienza tanto individuale quanto sociale.<br>
+							<br>
+							La percezione che abbiamo dello spazio personale è mitigata dall’abitudine con cui viene incorporato nella vita quotidiana: sensibili alla sua violazione, ne sperimentiamo spesso solo gli effetti negativi.<br>
+							<br>
+							Sòno è un’area di sperimentazione.<br>
+							<br>
+							Lo spazio personale di ognuno si traduce in un suono specifico, e le interazioni con gli altri, secondo le loro distanze, in combinazioni sonore sempre nuove: la particolarità di ogni spazio e i movimenti irripetibili degli utenti generano un’esperienza immersiva che dà all’individuo libertà espressiva e consapevolezza relazionale. <br>
+							<br>
+							La posizione dei partecipanti viene tracciata grazie al riconoscimento di simboli codificati posti in cima alle cuffie, dispositivo di ascolto del singolo che lo isola dall’ambiente immergendolo nell’esperienza. L’evoluzione di sòno nel tempo è resa comunicabile ai partecipanti inattivi da una visualizzazione che traduce il movimento e le pulsazioni sonore in grafiche proiettate.
+					</body>
+				</div>
+			</div>
+
+		<div id="gg-screen"></div>
+		<div class="gg-box">
+		  <div class="gg-element">
+		    <img src="img/3.jpg">
+		  </div>
+		  <div class="gg-element">
+		    <img src="img/7.jpg">
+		  </div>
+		  <div class="gg-element">
+		    <img src="img/1.gif">
+		  </div>
+		  <div class="gg-element">
+		    <img src="img/4.jpg">
+		  </div>
+			<div class="gg-element">
+		    <img src="img/2.jpg">
+		  </div>
+		  <div class="gg-element">
+		    <img src="img/6.gif">
+		  </div>
+			<div class="gg-element">
+		    <img src="img/5.gif">
+		  </div>
+		  <!-- <div class="gg-element">
+		    <img src="img/8.jpg">
+		  </div> -->
+		</div>
+
+		<div id='footer'>
+			<p id='footerCrediti'>
+				Progetto realizzato durante il Laboratorio di Sintesi Finale C1, Corso di Laurea Triennale in Design della Comunicazione<br>
+Scuola del Design, Politecnico di Milano, AA 2018/2019<br>
+<br>
+Si ringraziano i professori Francesco Ermanno Guida, Andrea Braccaloni, Giacomo Scandolara, Pietro Buffa Di Castelalto, gli assistenti Marcello Jacopo Biffi, Claudia Tranti e Gabriele Donini, tutto il team del LAB Immagine, Andrej Boleslavský, Giulio Montagner e Marc Muller, i tecnici di laboratorio Danilo Fumagalli, Livio Riceputi, e gli amici che ci hanno sostenuto.
+
+			</p>
+			<p id='footerNames'>
+				<a href="mailto:arianna.agu@gmail.com" class="name-effect">Arianna Agudio</a> <br>
+				<a href="mailto:matteo.garagiola@outlook.com" class="name-effect">Matteo Garagiola</a> <br>
+				<a href="mailto:mic.pedrazzini@gmail.com" class="name-effect">Michele Pedrazzini</a> <br>
+				<a href="mailto:tea.riva@outlook.com" class="name-effect">Tea Riva</a> <br>
+				<a href="mailto:sironij@gmail.com" class="name-effect">Jacopo Sironi</a>
+			</p>
+		</div>
+
+		<script type="text/javascript" src="js/grid-gallery.js"></script>
+
+	</body>
+	<script>
+
+		var didScroll;
+		var lastScrollTop = 0;
+		var delta = 1;
+		var navbarHeight = $('#main').outerHeight();
+		var angle0;
+
+		// $(document).ready(function(){
+		// 	resize();
+		// });
+		//
+		// window.onresize = function(event) {
+		// 	resize();
+		// }
+		//
+		// function resize() {
+		// 	vpw = $(window).width();
+		// 	w = parseInt(vpw);
+		// 	if (w<1000) {
+		// 		$('#main').css({'width': '95%'});
+		// 		$('#main').css({'left': '2.5%'});
+		// 		$('#header').css({'width': '95%'});
+		// 		$('#header').css({'left': '2.5%'});
+		// 		$('#testo').css({'font-size': '12pt'});
+		// 	} else {
+		// 		$('#main').css({'width': '85%'});
+		// 		$('#main').css({'left': '7.5%'});
+		// 		$('#header').css({'width': '85%'});
+		// 		$('#header').css({'left': '7.5%'});
+		// 		$('#testo').css({'font-size': '15pt'});
+		// 	}
+		// }
+
+
+
+		// $(window).scroll(function(event){
+		//   didScroll = true;
+		// });
+		//
+		// setInterval(function() {
+		//   if (didScroll) {
+		//     hasScrolled();
+		//     didScroll = false;
+		//   }
+		// }, 250);
+		//
+		// function hasScrolled() {
+		//   var st = $(this).scrollTop();
+		// 	if (st > lastScrollTop){
+	  // 		$('#header').addClass('nav-up');
+		// 	} else {
+	  // 		if(st + $(window).height() < $(document).height()) {
+	  //   		$('#header').removeClass('nav-up');
+	  // 		}
+		// 	}
+		// 	lastScrollTop = st;
+		// }
+
+
+//prova scroll
+
+		var c, currentScrollTop = 0,
+		       navbar = $('#header');
+
+		   $(window).scroll(function () {
+		      var a = $(window).scrollTop();
+		      var b = navbar.height();
+
+		      currentScrollTop = a;
+
+		      if (c < currentScrollTop && a > b) {
+		        navbar.addClass("nav-up");
+		      } else if (c > currentScrollTop && !(a <= b)) {
+		        navbar.removeClass("nav-up");
+		      }
+		      c = currentScrollTop;
+		  });
+
+		//BISCIONE
+
+		var nFette = 37;
+
+		$(document).ready(function(){
+			vpw = $(window).width()/5;
+			moltiplicaFette();
+		});
+
+		function moltiplicaFette() {
+			for (i=0; i<nFette; i++) {
+				var $div = $('div[id^="quadrato"]:last');
+				var num = parseInt( $div.prop("id").match(/\d+/g), 10 ) +1;
+				var $klon = $div.clone().prop('id', 'quadrato'+num );
+				$div.after( $klon.prop('id', 'quadrato'+num) );
+
+				$('#quadrato'+num).css({'z-index': -i-1});
+
+				var $div = $('img[id^="immagine"]:last');
+				$div.attr('id', 'immagine'+(i+1));
+				if (i<50) {
+					$div.attr('src', './BiscioneSVG/fettaTavoladisegno'+i+'.svg');
+				} else {
+					$div.attr('src', './BiscioneSVG/fettaTavoladisegno49.svg');
+				}
+			}
+		}
+
+		var height = window.innerHeight
+						|| document.documentElement.clientHeight
+						|| document.body.clientHeight;
+
+		AOS.init({
+						duration: 80,
+						mirror: true,
+						offset: height + 50
+		})
+
+	</script>
+</html>

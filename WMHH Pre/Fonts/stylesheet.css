@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Canela Text';
+    src: url('CanelaText-Regular.woff') format('woff'),
+        url('CanelaText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

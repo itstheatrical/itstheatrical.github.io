@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <style>
+            body{
+              background-color: white;
+            }
+
+            #tap{
+              position:absolute;
+              top: 50%; left: 50%;
+              height: 360px; width: 360px;
+              transform: translate(-50%,-50%);
+              background-color: red;
+            }
+
+            #cerkio{
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+            }
+
+
+            #punto{
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+            }
+
+            .cerchioNero{
+              height: 25%; width: 25%;
+              background-color: black;
+              transition: 0.3s;
+            }
+
+            .puntoNero{
+              height: 100%; width: 100%;
+              border: 1px black solid;
+              transition: 0.3s
+            }
+
+            .cerchioBianco{
+              height: 25%; width: 25%;
+              background-color: white;
+              transition: 0.3s;
+            }
+
+            .puntoBianco{
+              height: 100%; width: 100%;
+              border: 1px white solid;
+              transition: 0.3s
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="tap">
+          <div id="cerkio" class="cerchioNero" ></div>
+          <div id="punto" class="puntoNero"></div>
+        </div>
+
+              <script>
+
+              var black = 0;
+
+              function ClickUno() {
+                  $("#cerkio").removeClass("cerchioNero");
+                  $("#cerkio").addClass("puntoBianco");
+                  $("#punto").removeClass("puntoNero");
+                  $("#punto").addClass("cerchioBianco");
+              }
+
+              function ClickDue() {
+                $("#cerkio").removeClass("puntoBianco");
+                $("#cerkio").addClass("cerchioNero");
+                $("#punto").removeClass("cerchioBianco");
+                $("#punto").addClass("puntoNero");
+              }
+
+              function inverti() {
+                if (black == 0) {
+                black = 1;
+                ClickUno()
+                }
+                else  {
+                black = 0;
+                ClickDue()
+                }
+              }
+
+            $("#tap").click(inverti)
+
+
+              </script>
+    </body>
+
+</html>

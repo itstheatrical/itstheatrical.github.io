@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <style>
+
+
+            #tap{
+              position:absolute;
+              top: 50%; left: 50%;
+              height: 36px; width: 36px;
+              transform: translate(-50%,-50%);
+              background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            .cerchio {
+              position:absolute;
+              top: 50%; left: 50%;
+              transform: translate(-50%,-50%);
+              border-radius: 50%;
+              border: 1px black solid;
+              transition: 0.3s;
+            }
+
+            .cerchioL{
+              height: 100%; width: 100%;
+            }
+
+            .cerchioM{
+              height: 75%; width: 75%;
+              animation-timing-function: ease;
+            }
+
+            .cerchioS{
+              height: 50%; width: 50%;
+              animation-timing-function: ease;
+            }
+
+
+        </style>
+    </head>
+    <body>
+      <div id="tap">
+        <div id="cerchioL" class="cerchio cerchioL" ></div>
+        <div id="cerchioM" class="cerchio cerchioM" ></div>
+        <div id="cerchioS" class="cerchio cerchioS" ></div>
+      </div>
+
+              <script>
+
+              var mute = 0;
+
+              function ClickUno() {
+
+                $("#cerchioM").removeClass("cerchioM");
+                $("#cerchioM").addClass("cerchioL");
+
+                $("#cerchioS").removeClass("cerchioS");
+                $("#cerchioS").addClass("cerchioL");
+
+              }
+
+              function ClickDue() {
+                $("#cerchioM").removeClass("cerchioL");
+                $("#cerchioM").addClass("cerchioM");
+
+                $("#cerchioS").removeClass("cerchioM");
+                $("#cerchioS").addClass("cerchioS");
+              }
+
+              function onoff() {
+                if (mute == 0) {
+                mute = 1;
+                ClickUno()
+                }
+                else  {
+                mute = 0;
+                ClickDue()
+                }
+              }
+
+            $("#tap").click(onoff)
+
+
+              </script>
+    </body>
+
+</html>
