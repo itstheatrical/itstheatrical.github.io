@@ -37,51 +37,10 @@ body {
   /* transition: 0.5s; */
 }
 
-#i1 {
-  position: relative;
-}
-
-#i2 {
-  position: relative;
-  top:12.5%
-}
-
-#i3 {
-  position: relative;
-  top:25%
-}
-
-#i4 {
-  position: relative;
-  top:37.5%
-}
-
-#i5 {
-  position: relative;
-  top:50%
-}
-
-#i6 {
-  position: relative;
-  top:62.5%
-}
-
-#i7 {
-  position: relative;
-  top:75%
-}
-
-#i8 {
-  position: relative;
-  top:87.5%
-}
-
-
 #block {
   position: fixed;
-  bottom: 22%; top: 20%;
+  bottom: 22%;
   left: 10%;
-  height: 40%;
   text-transform: uppercase;
   font-size: 30px;
   line-height: 15px;
@@ -129,7 +88,7 @@ body {
 
 @media (min-width: 900px) and (max-width: 1050px) {
   /* Structure 600 to 980 */
-    #block    {font-size: 25px; top: 25%;height: 30%;line-height: 17px}
+    #block    {font-size: 25px; bottom: 24%; line-height: 17px}
     #gif      {width: 50px}
     }
 
@@ -150,12 +109,12 @@ body {
     }
 
 @media (min-width: 550px) and (max-width: 900px) {
-    #block    {font-size: 22px; top: 27%; width: 72%; height: 20%; vertical-align: sub;line-height: 20px;}
+    #block    {font-size: 22px; bottom: 24%; width: 72%;vertical-align: sub;line-height: 20px;}
     #gif      {width: 40px}
     }
 
 @media (min-width: 400px) and (max-width: 550px) {
-    #block    {font-size: 22px; top: 15%; height: 30%; width: 72%;vertical-align: sub;line-height: 20px;}
+    #block    {font-size: 22px; bottom: 24%; width: 72%;vertical-align: sub;line-height: 20px;}
     #t1       {bottom: calc(12% + 22px);}
     #t2       {left: 10%; transform: translatex(0%)}
     #t3       {bottom: calc(12% - 22px); left: 10%;;}
@@ -163,7 +122,7 @@ body {
     }
 
 @media (max-width: 400px) {
-    #block    {font-size: 19px; bottom: 24%; height: 10%;width: 62%;vertical-align: text-bottom;line-height: 18px;}
+    #block    {font-size: 19px; bottom: 24%; width: 62%;vertical-align: text-bottom;;line-height: 18px;}
     #t1       {bottom: calc(12% + 22px);}
     #t2       {left: 10%; transform: translatex(0%)}
     #t3       {bottom: calc(12% - 22px); left: 10%;;}
@@ -177,14 +136,14 @@ body {
 
   <body>
   <div id="block">
-    <a class="text" id="i1" onclick="window.location.href='https://issuu.com/tea.riva/docs/2_first_thing_first_sp' "> 2 / first things first <br></a>
-    <a class="text" id="i2" onclick="window.location.href='https://issuu.com/tea.riva/docs/3_specimen_sp'"> 3 / freight big pro <br></a>
-    <a class="text" id="i3" onclick="window.location.href='https://issuu.com/tea.riva/docs/tes_magazine'"> 4 / tes magazine <br></a>
-    <a class="text" id="i4" onclick="window.location.href='https://issuu.com/tea.riva/docs/pulp_fiction_rgb_sp'"> 5 / the last one standing <br></a>
-    <a class="text" id="i5" onclick="window.location.href='https://issuu.com/tea.riva/docs/catalogodefinitivo_small__1_'"> 7 / what makes humans human? - catalogue <br></a>
-    <a class="text" id="i6" onclick="location.href='WMHH Pre/index.html'"> 7 / what makes humans human? - landing page <br></a>
-    <a class="text" id="i7" onclick="location.href='sòno Pre/index.html'"> 8 / sòno - landing page <br></a>
-    <a class="text" id="i8" onclick="location.href='sòno finale/index.html'"> 8 / sòno - website <br></a>
+    <p class="text" onclick="window.location.href='https://issuu.com/tea.riva/docs/2_first_thing_first_sp' "> 2 / first things first </p>
+    <p class="text" onclick="window.location.href='https://issuu.com/tea.riva/docs/3_specimen_sp'"> 3 / freight big pro </p>
+    <p class="text" onclick="window.location.href='https://issuu.com/tea.riva/docs/tes_magazine'"> 4 / tes magazine </p>
+    <p class="text" onclick="window.location.href='https://issuu.com/tea.riva/docs/pulp_fiction_rgb_sp'"> 5 / the last one standing </p>
+    <p class="text" onclick="window.location.href='https://issuu.com/tea.riva/docs/catalogodefinitivo_small__1_'"> 7 / what makes humans human? - catalogue </p>
+    <p class="text" onclick="location.href='WMHH Pre/index.html'"> 7 / what makes humans human? - landing page </p>
+    <p class="text" onclick="location.href='sòno Pre/index.html'"> 8 / sòno - landing page </p>
+    <p class="text" onclick="location.href='sòno finale/index.html'"> 8 / sòno - website </p>
   </div>
 
    <img src="titolo.gif" id="gif">
